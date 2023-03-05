@@ -1,5 +1,7 @@
 #pragma once
 
+#include "esphome/core/hal.h"
+
 template <typename T, size_t N> class VolatileBitSet {
 public:
   bool get(size_t n) { return (set_[idx(n)] & mask(n)) != 0; }

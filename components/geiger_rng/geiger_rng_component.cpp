@@ -1,8 +1,9 @@
+#include "geiger_rng_component.h"
+
 #include <cinttypes>
 
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
-#include "geiger_rng_component.h"
 
 using namespace esphome;
 
@@ -39,10 +40,10 @@ void GeigerRNGComponent::setup() {
 String GeigerRNGComponent::host_port_for(AsyncClient *client) const {
   const auto c = async_clients_.find(client);
   if (c == async_clients_.end()) {
-    return String("(unknown client)");
-  } else {
-    return c->second;
+    return {"(unknown client)"};
   }
+
+  return c->second;
 }
 
 void GeigerRNGComponent::client_connected(void *arg, AsyncClient *client) {
@@ -84,7 +85,8 @@ void GeigerRNGComponent::dump_config() {
   ESP_LOGCONFIG(TAG, "RNG:");
   LOG_PIN("  Pin: ", pin_);
   ESP_LOGCONFIG(TAG, "  Port: %" PRIu16, port_);
-  ESP_LOGCONFIG(TAG, "  Filtering pulses shorter than %u µs", internal_filter_);
+  ESP_LOGCONFIG(TAG, "  Filtering pulses shorter than %" PRIu32 "µs",
+                internal_filter_);
 }
 
 bool GeigerRNGComponent::get_random_byte(uint8_t *val) {

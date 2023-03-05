@@ -1,5 +1,7 @@
 #pragma once
 
+#include <unordered_map>
+
 #include "esphome/core/component.h"
 #include "esphome/core/gpio.h"
 #include "shared_ring_buffer.h"
@@ -9,8 +11,6 @@
 #else
 #include "AsyncTCP.h"
 #endif
-
-#include <unordered_map>
 
 class GeigerRNGComponent : public esphome::Component {
 public:
