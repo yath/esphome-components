@@ -26,7 +26,6 @@ protected:
 };
 
 template <typename T, size_t N> class SharedRingBuffer {
-
 public:
   void IRAM_ATTR push(T value) {
     buffer_[inpos_] = value;
